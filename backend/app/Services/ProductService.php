@@ -5,9 +5,7 @@ namespace App\Services;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
-use App\Mail\OrderCreatedNotification;
-use Exception;
-use Illuminate\Support\Facades\Mail;
+
 
 class ProductService
 {
@@ -15,13 +13,13 @@ class ProductService
     {
 
         DB::beginTransaction();
-        $order = Product::create([
+        $product = Product::create([
                 'name' => $data['name'],
                 'price'   => $data['price'],
                 'category'  => $data['category'],
             ]);
         DB::commit();
-        return $order;
+        return $product;
 
     }
 
