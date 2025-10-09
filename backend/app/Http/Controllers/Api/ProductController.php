@@ -16,7 +16,7 @@ class ProductController extends Controller
         $this->productService = $productService;
     }
 
-    public function index(Request $request)
+    public function index()
     {
         $products = $this->productService->listProducts();
         return response()->json($products);
@@ -24,12 +24,29 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->json()->all(); // Decodifica o JSON para array
+        $data = $request->json()->all();
 
         $order = $this->productService->createProduct($data);
 
         return response()->json($order);
     }
+
+    public function update(Request $request, $id)
+    {
+        $data = $request->json()->all();
+
+        $order = $this->productService->updateProduct($data);
+
+        return response()->json($order);
+    }
+
+    public function destroy($id)
+    {
+        $result = $this->productService->deleteProduct((int)$id);
+        return response()->json(['success' => $result]);
+    }
+
+
 
 
 }
