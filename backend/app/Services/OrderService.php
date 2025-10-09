@@ -6,6 +6,7 @@ use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
 use App\Models\OrderItem;
+use App\Jobs\UpdateOrderStatus;
 
 class OrderService
 {
@@ -30,7 +31,9 @@ class OrderService
             OrderItem::create($orderProduct);
         }
         DB::commit();
-        return $order->with('items')->toArray();
+        $delayInSeconds = 20;
+        UpdateOrderStatus::dispatch($order)->delay(now()->addSeconds($delayInSeconds));
+        return $order->toArray();
 
     }
 
