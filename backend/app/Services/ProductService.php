@@ -27,14 +27,20 @@ class ProductService
 
     public function listProducts(): array
     {
-        return Product::all()->toArray();
+        $products = Product::all()->toArray();
+
+        if (!$products) {
+            return array('message'=> 'No products found');
+        } else {
+            return $products;
+        }
     }
 
-    public function updateProduct(array $data) : Product
+    public function updateProduct(array $data) : array
     {
         $product = Product::find($data['id']);
         if (!$product) {
-            throw new Exception("Product not found");
+            return array('message'=> 'Product not found');
         } else {
             $product->update([
                 'name' => $data['name'],
@@ -48,11 +54,7 @@ class ProductService
     public function deleteProduct(int $id) : bool
     {
         $product = Product::find($id);
-        if (!$product) {
-            throw new Exception("Product not found");
-        } else {
-            return $product->delete();
-        }
+        return $product->delete();
     }
 
 
