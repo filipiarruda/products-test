@@ -37,15 +37,9 @@ class OrderService
 
     }
 
-    public function listOrders(): array
+    public function listOrders(int $perPage = 10): array
     {
-        $orders = Order::all()->toArray();
-
-        if (!$orders) {
-            return array('message'=> 'No orders found');
-        } else {
-            return $orders;
-        }
+        return Order::paginate($perPage);
     }
 
     public function getOrder(int $id) : array

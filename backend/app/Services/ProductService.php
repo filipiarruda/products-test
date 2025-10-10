@@ -23,15 +23,9 @@ class ProductService
 
     }
 
-    public function listProducts(): array
+    public function listProducts(int $perPage = 10): array
     {
-        $products = Product::all()->toArray();
-
-        if (!$products) {
-            return array('message'=> 'No products found');
-        } else {
-            return $products;
-        }
+        return Product::paginate($perPage);
     }
 
     public function updateProduct(array $data) : array

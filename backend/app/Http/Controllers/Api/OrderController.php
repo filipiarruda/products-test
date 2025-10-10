@@ -16,9 +16,10 @@ class OrderController extends Controller
         $this->orderService = $orderService;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $orders = $this->orderService->listOrders();
+        $perPage = $request->query('per_page', 10);
+        $orders = $this->orderService->listOrders($perPage);
         return response()->json($orders);
     }
 

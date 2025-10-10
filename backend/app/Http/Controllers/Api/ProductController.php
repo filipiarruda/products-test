@@ -16,9 +16,10 @@ class ProductController extends Controller
         $this->productService = $productService;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $products = $this->productService->listProducts();
+        $perPage = $request->query('per_page', 10);
+        $products = $this->productService->listProducts($perPage);
         return response()->json($products);
     }
 
