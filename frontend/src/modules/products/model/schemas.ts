@@ -14,5 +14,4 @@ export const productSchema = z.object({
     .min(1, 'A categoria é obrigatória.'),
 });
 
-// Tipagem baseada no schema, útil para o TypeScript
 export type ProductFormData = z.infer<typeof productSchema>;

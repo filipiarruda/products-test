@@ -10,8 +10,8 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { useCreateProductMutation } from '../../../model/queries';
 import { useRouter } from 'next/navigation';
 
-// Exemplo de lista de categorias (opcional)
-const categories = ['Eletrônicos', 'Roupas', 'Alimentos', 'Livros'];
+//Categorias mockadas, para implementar futuramente uma tabela de categorias no backend
+const categories = ['Eletrônicos', 'Roupas', 'Alimentos', 'Livros', 'Diversos'];
 
 const FormNewProduct: React.FC = () => {
   const { mutate, isPending } = useCreateProductMutation();
@@ -23,7 +23,6 @@ const FormNewProduct: React.FC = () => {
     reset,
   } = useForm<ProductFormData>({
     resolver: zodResolver(productSchema),
-    // Configuração opcional para garantir que o 'price' seja tratado como número
     defaultValues: {
       name: '',
       price: 0, 
@@ -77,9 +76,7 @@ const FormNewProduct: React.FC = () => {
           placeholder="0,00"
           {...register('price', {
             setValueAs: (value) => {
-              // Remove tudo que não for número
               const clean = String(value).replace(/\D/g, "");
-              // Converte para float com 2 casas decimais
               return clean ? parseFloat(clean) / 100 : 0;
             },
           })}
