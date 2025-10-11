@@ -1,5 +1,5 @@
-const NewProductPage = () => (
-  <div>Novo Produto</div>
-)
+import { NewProduct } from "@/modules/products";
+
+const NewProductPage = () => <NewProduct />
 
 export default NewProductPage;

@@ -26,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body className="flex h-screen w-screen flex-col antialiased">
-        <main className="flex h-full w-full max-w-full flex-1 overflow-hidden min-h-0">
+        <main className="flex h-full w-full max-w-full flex-1 overflow-hidden min-h-0 bg-zinc-800 text-zinc-200">
           <Providers>
             {children}
           </Providers>

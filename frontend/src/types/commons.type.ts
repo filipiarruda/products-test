@@ -8,9 +8,21 @@ export type PageProps<
 
 export type PaginationRequestProps = {
     page?: number;
-    limit?: number;
+    perPage?: number;
+}
+
+export type PaginationResposeProps<T> = {
+    data: T[];
+    total: number;
+    page: number;
+    perPage: number;
+    lastPage: number;
 }
 
 export type QueryCommonProps = {
     enabled?: boolean;
+}
+
+export type PageCommonProps = {
+    children: React.ReactNode; 
 }
