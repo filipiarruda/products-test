@@ -7,6 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use App\Events\OrderStatusUpdated;
 
 class UpdateOrderStatus implements ShouldQueue
 {
@@ -25,6 +26,7 @@ class UpdateOrderStatus implements ShouldQueue
 
         if ($order && $order->status === 'PENDING') {
             $order->update(['status' => 'PROCESSING']);
+            event(new OrderStatusUpdated($order->id, 'PROCESSING'));
         }
     }
 }

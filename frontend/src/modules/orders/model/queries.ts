@@ -1,8 +1,8 @@
 'use client'
 
-import { useQuery } from "@tanstack/react-query";
-import type { OrderListRequestProps } from "./types";
-import { getOrdersAction } from "./actions";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import type { OrderCreateRequestProps, OrderListRequestProps } from "./types";
+import { createOrderAction, getOrdersAction } from "./actions";
 
 export const useOrdersQuery = (props: OrderListRequestProps) =>
   useQuery({
@@ -13,3 +13,8 @@ export const useOrdersQuery = (props: OrderListRequestProps) =>
     staleTime: 0,
     refetchOnWindowFocus: false,
   });
+
+export const useCreateOrderMutation = () =>
+    useMutation({
+        mutationFn: (props: OrderCreateRequestProps) => createOrderAction(props),
+    });

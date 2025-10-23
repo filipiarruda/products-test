@@ -23,7 +23,7 @@ class ProductService
 
     }
 
-    public function listProducts(int $perPage = 10): array
+    public function listProducts(int $perPage = 10)
     {
         return Product::paginate($perPage);
     }

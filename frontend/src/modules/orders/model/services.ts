@@ -1,5 +1,5 @@
 import { api } from "@/utils/api";
-import type { OrderListRequestProps, OrderListResponseProps } from "./types";
+import type { OrderCreateRequestProps, OrderListRequestProps, OrderListResponseProps, OrderViewResponseProps } from "./types";
 
 export const getOrders = async (props: OrderListRequestProps): Promise<OrderListResponseProps> => {
     const response = await api.GET('/orders', {
@@ -34,4 +34,24 @@ export const getOrders = async (props: OrderListRequestProps): Promise<OrderList
         // @ts-ignore
         lastPage: response?.last_page || 1,
     }
+}
+
+export const createOrder = async (props: OrderCreateRequestProps) => {
+    const body = {
+        customer_name: props.customerName,
+        order_date: props.orderDate,
+        items: props.items.map(item => ({
+            product_id: item.productId,
+            quantity: item.quantity,
+        })),
+    };
+
+    return await api.POST('/orders', {
+        body,
+    });
+}
+
+export const getOrder = async (id: string): Promise<OrderViewResponseProps> => {
+    const response = await api.GET<OrderViewResponseProps>(`/orders/${id}`);
+    return response;
 }

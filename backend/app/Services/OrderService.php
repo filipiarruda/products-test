@@ -37,7 +37,7 @@ class OrderService
 
     }
 
-    public function listOrders(int $perPage = 10): array
+    public function listOrders(int $perPage = 10)
     {
         return Order::paginate($perPage);
     }

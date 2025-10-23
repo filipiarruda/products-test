@@ -1,5 +1,7 @@
-const NewOrderPage = () => (
-  <div>Novo pedido</div>
-)
+import NewOrderPage from "@/modules/orders/view/NewPage";
 
-export default NewOrderPage;
+const NewOrder = () => {
+    return <NewOrderPage />;
+}
+
+export default NewOrder;

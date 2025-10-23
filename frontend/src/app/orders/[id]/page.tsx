@@ -1,5 +1,13 @@
-const OrderDetailsPage = () => (
-  <div>Detalhe do pedido</div>
-)
+import ViewPage from "@/modules/orders/view/ViewPage";
 
-export default OrderDetailsPage;
+type Props = {
+    params: {
+        id: string;
+    }
+}
+
+const Page = ({ params }: Props) => {
+    return <ViewPage id={params.id} />
+}
+
+export default Page;
